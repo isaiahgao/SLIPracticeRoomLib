@@ -9,11 +9,13 @@ public class FullName {
 		String[] arr = saveable.split("§");
 		this.first = arr[0];
 		this.last = arr[1];
+		this.validateName();
 	}
 
     public FullName(String first, String last) {
         this.first = first;
         this.last = last;
+		this.validateName();
     }
 
     private String first;
@@ -34,6 +36,11 @@ public class FullName {
     @Override
     public String toString() {
         return this.first + " " + this.last;
+    }
+    
+    private void validateName() {
+    	this.first = this.first.replaceAll("[^a-zA-Z0-9 -]", "");
+    	this.last = this.last.replaceAll("[^a-zA-Z0-9 -]", "");
     }
 
 }

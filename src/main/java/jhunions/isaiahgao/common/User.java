@@ -1,5 +1,9 @@
 package jhunions.isaiahgao.common;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 public class User {
 	
     public User(String hopkinsID, FullName name, String jhed, long phone) {
@@ -9,14 +13,20 @@ public class User {
         this.phone = phone;
     }
     
-    public User(String saveable) {
-    	String[] arr = saveable.split("\t");
-    	this.hopkinsID = arr[0];
-    	this.jhed = arr[1];
-    	this.name = new FullName(arr[2]);
-    	this.phone = Long.parseLong(arr[3]);
+    public User(String json) {
+        JsonNode body;
+        try {
+            body = JsonUtils.getJson().readTree(json);
+        } catch (IOException e) {
+        	return;
+        }
+        
+        this.hopkinsID = body.get("id").asText();
+        this.jhed = body.get("jhed").asText();
+        this.name = new FullName(body.get("name").asText());
+        this.phone = body.get("phone").asLong();
     }
-
+    
     private String hopkinsID;
     private String jhed;
     private FullName name;
@@ -54,7 +64,12 @@ public class User {
     
     @Override
     public String toString() {
-    	return this.hopkinsID + "\t" + this.jhed + "\t" + this.name.toSaveableString() + "\t" + this.phone;
+    	return "{"
+    			+ "\"id\":\"" + this.hopkinsID + "\","
+    			+ "\"jhed\":\"" + this.jhed + "\","
+    			+ "\"name\":\"" + this.name.toSaveableString() + "\","
+    			+ "\"phone\":\"" + this.phone + "\""
+    			+ "}";
     }
     
 }
