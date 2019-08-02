@@ -19,5 +19,11 @@ public class Exceptions {
 		private static final long serialVersionUID = 7379205881588301229L;
 		
 	}
+	
+	public static class InvalidSyntaxException extends Exception {
+
+		private static final long serialVersionUID = 7952672410855300755L;
+		
+	}
 
 }

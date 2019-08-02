@@ -41,6 +41,13 @@ public class CheckOutable {
 		return this.occupant;
 	}
 	
+	public void writeToLog() {
+		// TODO
+	}
+	
+	/**
+	 * Auto updates check in and out times.
+	 */
 	public CheckOutable setOccupant(@Nullable User user) {
 		if (this.occupant == null) {
 			this.checkedOut = System.currentTimeMillis();
