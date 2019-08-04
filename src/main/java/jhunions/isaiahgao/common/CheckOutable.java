@@ -6,12 +6,33 @@ public class CheckOutable {
 
 	public CheckOutable(String id) {
 		this.id = id;
+		this.enabled = true;
 	}
 	
 	protected String id;
 	protected User occupant;
 	protected long checkedOut;
 	protected long checkedIn;
+	protected String disabledReason;
+	protected boolean enabled;
+	
+	public String getDisabledReason() {
+		return this.disabledReason;
+	}
+	
+	public void disable(String reason) {
+		this.disabledReason = reason;
+		this.enabled = false;
+	}
+	
+	public void enable() {
+		this.enabled = true;
+		this.disable(null);
+	}
+	
+	public boolean isEnabled() {
+		return this.enabled;
+	}
 	
 	public void setTimeCheckedOut(long time) {
 		this.checkedOut = time;
