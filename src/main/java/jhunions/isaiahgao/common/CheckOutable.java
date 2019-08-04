@@ -10,7 +10,7 @@ public class CheckOutable {
 	}
 	
 	protected String id;
-	protected User occupant;
+	protected UserInstance occupant;
 	protected long checkedOut;
 	protected long checkedIn;
 	protected String disabledReason;
@@ -59,11 +59,11 @@ public class CheckOutable {
 	}
 	
 	public @Nullable User getOccupant() {
-		return this.occupant;
+		return this.occupant == null ? null : this.occupant.getUser();
 	}
 	
-	public void writeToLog() {
-		// TODO
+	public UserInstance getOccupantInstance() {
+		return this.occupant;
 	}
 	
 	/**
@@ -73,10 +73,11 @@ public class CheckOutable {
 		if (this.occupant == null) {
 			this.checkedOut = System.currentTimeMillis();
 		}
-		this.occupant = user;
 		
 		if (user == null) {
 			this.checkedIn = System.currentTimeMillis();
+		} else {
+			this.occupant = new UserInstance(user, id, 90);
 		}
 		return this;
 	}

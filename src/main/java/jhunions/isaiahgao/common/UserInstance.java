@@ -1,15 +1,17 @@
 package jhunions.isaiahgao.common;
 
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Represents a user of the practice room.
  */
 public class UserInstance {
 
-    public UserInstance(User who, int room, int timeLimitMinutes) {
+    public UserInstance(User who, String room, int timeLimitMinutes) {
         this.who = who;
         this.room = room;
         this.timeIn = new Date();
@@ -17,7 +19,7 @@ public class UserInstance {
     }
 
     private User who;
-    private int room;
+    private String room;
     private Date timeIn, min90;
     private int line;
     
@@ -33,7 +35,7 @@ public class UserInstance {
         return this.who;
     }
     
-    public int getRoom() {
+    public String getRoom() {
         return this.room;
     }
     
@@ -62,4 +64,19 @@ public class UserInstance {
         return Utils.capitalizeFirst(Month.of(this.timeIn.getMonth() + 1).toString()) + " " + Calendar.getInstance().get(Calendar.YEAR);
     }
 
+    public List<Object> toObjectList() {
+        Date date = new Date();
+        String ds = (date.getMonth() + 1) + "/" + date.getDate() + "/" + (date.getYear() + 1900);
+        String time = Utils.getTime(date);
+        
+        List<Object> list = new ArrayList<>();
+        list.add(ds + " " + time.substring(0, time.length() - 3));
+        list.add(this.who.getName().getFirstName() + " " + this.who.getName().getLastName());
+        list.add(this.who.getJhed() + "@jhu.edu");
+        list.add(this.who.getPhone());
+        list.add("Room " + this.room);
+        list.add(time);
+        list.add("I agree");
+        return list;
+    }
 }
