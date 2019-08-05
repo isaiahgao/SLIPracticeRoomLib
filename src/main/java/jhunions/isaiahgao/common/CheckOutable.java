@@ -76,6 +76,7 @@ public class CheckOutable {
 		
 		if (user == null) {
 			this.checkedIn = System.currentTimeMillis();
+			this.occupant = null;
 		} else {
 			this.occupant = new UserInstance(user, id, 90);
 		}
