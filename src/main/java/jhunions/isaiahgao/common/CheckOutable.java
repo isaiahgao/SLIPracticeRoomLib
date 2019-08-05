@@ -27,7 +27,7 @@ public class CheckOutable {
 	
 	public void enable() {
 		this.enabled = true;
-		this.disable(null);
+		this.disabledReason = null;
 	}
 	
 	public boolean isEnabled() {
