@@ -1,6 +1,8 @@
 package jhunions.isaiahgao.common;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -31,6 +33,26 @@ public class User {
     private String jhed;
     private FullName name;
     private long phone;
+    
+    public String checkForErrors() {
+    	try {
+    		if (!Character.isAlphabetic(this.jhed.charAt(0)))
+    			return "Invalid JHED.";
+    		
+    		if (!Character.isDigit(this.jhed.charAt(this.jhed.length() - 1)))
+    			return "Invalid JHED.";
+    		
+    		if ((this.phone + "").length() != 10)
+    			return "Invalid phone number.";
+    		
+    		String ps = this.phone + "";
+    		if (ps.substring(0, 3).equals(ps.substring(3, 6)) && ps.subSequence(0, 3).equals(ps.substring(6, 9)))
+    			return "Invalid phone number.";
+    	} catch (Exception e) {
+    		return "Invalid info.";
+    	}
+    	return null;
+    }
     
     public String getHopkinsID() {
         return hopkinsID;
