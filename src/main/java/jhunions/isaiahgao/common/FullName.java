@@ -6,7 +6,10 @@ package jhunions.isaiahgao.common;
 public class FullName {
 	
 	public FullName(String saveable) {
+		System.out.println(saveable);
 		String[] arr = saveable.split("§");
+		if (arr.length == 1)
+			arr = saveable.split("_");
 		this.first = arr[0];
 		this.last = arr[1];
 		this.validateName();
@@ -30,7 +33,7 @@ public class FullName {
     }
     
     public String toSaveableString() {
-    	return this.first + "§" + this.last;
+    	return this.first + "_" + this.last;
     }
     
     @Override

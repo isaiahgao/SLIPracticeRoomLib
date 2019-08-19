@@ -1,8 +1,6 @@
 package jhunions.isaiahgao.common;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -13,6 +11,13 @@ public class User {
         this.name = name;
         this.jhed = jhed;
         this.phone = phone;
+    }
+    
+    public User(JsonNode body) {
+        this.hopkinsID = body.get("id").asText();
+        this.jhed = body.get("jhed").asText();
+        this.name = new FullName(body.get("name").asText());
+        this.phone = body.get("phone").asLong();
     }
     
     public User(String json) {
