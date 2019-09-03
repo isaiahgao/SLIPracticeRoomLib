@@ -12,7 +12,7 @@ public class PracticeRoom extends CheckOutable {
 	
 	public int getMinutesUntilAvailable() {
 		return (int) (this.isOccupied() ?
-				Math.max(-1, 90 - (System.currentTimeMillis() - this.getTimeCheckedOut()) / 1000 / 60)
+				Math.max(0, 90 - (System.currentTimeMillis() - this.getTimeCheckedOut()) / 1000 / 60)
 				: -1);
 	}
 
